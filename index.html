@@ -45,13 +45,33 @@
         <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
     </div>
       
-    <h1><a href="http://github.com/rtyler/cheetah">Cheetah CE</a></h1>
+    <h1><a href="http://github.com/rtyler/cheetah">Cheetah Community Edition</a></h1>
 
     <div class="description">
-      Cheetah Template engine, Community Edition
+      A community-driven Cheetah Template engine
     </div>
 
-    <p>This is an extension of the Cheetah Template project hosted at www.cheetahtemplate.org. It aims to provide more current versions of the Cheetah Template engine with community provided patches.</p><h2>Authors</h2>
+    <p>This is an extension of the Cheetah Template project hosted at www.cheetahtemplate.org. It aims to provide more current versions of the Cheetah Template engine with community provided patches.</p>
+
+	<p>The current release of Cheetah CE is <strong>v2.1.0</strong> which contains the following changes from v2.0.1:<br/>
+	<pre>
+- Quiet DeprecationWarnings being printed to stderr when using Cheetah on
+	Python 2.6 and up. 	Patch suggested by Satoru SATOH 
+- Apply patch to support parallel compilation of templates courtesy of 
+	Evan Klitzke 
+- Corrected issue when __getattr__ calls on searchList objects raise exceptions 
+- make autocalling in valueForName correctly ignore newstyle classes and instances
+	that are callable, as it does for oldstyle classes and instances.  Patch
+	from lucas@endian.com [TR]
+- made it possible to chain multiple decorators to a method #def [TR with
+	patch from Graham Dennis]
+- fixed a bug in _eatMultiLineDef that Graham Dennis reported. [TR] 
+- fixed 'module.__init__() argument 1 must be string, not unicode' bug in
+	Template.py reported by Erwin Ambrosch [TR]	
+	</pre>
+	</p>
+	
+	<h2>Authors</h2>
 	<ul>
 		<li>R. Tyler Ballance (tyler@slide.com) <small>[CE maintainer]</small></li>
 		<li>Tavis Rudd (tavis@dawnsimple.com) <small>[original author]</small></li>
@@ -75,9 +95,6 @@
     <div class="footer">
       get the source code on GitHub : <a href="http://github.com/rtyler/cheetah">rtyler/cheetah</a>
     </div>
-    
   </div>
-
-  
 </body>
 </html>
