@@ -78,8 +78,11 @@
 #end def
 
 #def header()
+<a href="http://github.com/rtyler/cheetah">
+    <img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png" alt="Fork me on GitHub" />
+</a>
     <div id="blogtitle">
-            <div id="small"><a href="#">Community Cheetah</a> </div>
+            <div id="small" style="margin-left: 130px;"><a href="#">Community Cheetah</a> </div>
             <div id="small2">
                 #for $Name, $Link, $IsTab in $Pages
                     #if $IsTab and not $Name == 'Home'
@@ -107,8 +110,8 @@
 #end def
 
 #def footer()
-    <div id="footer">&copy; 2006 Design by <a href="http://www.studio7designs.com">Studio7designs.com</a>
-
+    <div id="footer">
+        &copy; 2006 Design by <a href="http://www.studio7designs.com">Studio7designs.com</a>
 #*
 
     <!-- start left boxes -->
