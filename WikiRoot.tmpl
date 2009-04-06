@@ -1,0 +1,139 @@
+#from Cheetah.Template import Template
+#extends Template
+#implements respond
+
+## (Name, Link, IsTab)
+#set global $Pages = [
+                        ('Home', 'index.html', True), 
+                        ('Download', 'download.html', True),
+                        ('Documentation', 'docs.html', True),
+                        ('Recipes', 'recipes.html', True),
+                        ('Issues', 'http://bugs.communitycheetah.org', False),
+                        ('Developers', 'developers.html', True),
+                        ('Source', 'http://github.com/rtyler/cheetah/tree/master', False),
+                        ('Mailing List', 'http://lists.sourceforge.net/lists/listinfo/cheetahtemplate-discuss', False),
+                        ]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title>Community Cheetah - $pagename()</title>
+        <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+        <meta name="keywords" content="#" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="language" content="en-us, english" />
+
+        <link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen, projection, tv " />
+	</head>
+	<body>
+
+        $header()
+
+        #if $leftsidebar()
+            <div id="leftcontent">
+                <img style="margin-top:-9px; margin-left:-12px;" src="images/top2.jpg" alt="" />
+
+                $leftsidebar()
+
+                <img style="padding-top:2px; margin-left:-12px; margin-bottom:-4px;" src="images/specs_bottom.jpg" alt="" />
+            </div>
+        #end if
+
+        <div id="centercontent">
+           $content()
+        </div>
+
+        <div id="rightcontent">
+            <img style="margin-top:-9px; margin-left: -5px;" src="images/top2.jpg" alt="" />
+            
+            $rightsidebar()
+
+            <img style="padding-top:5px; margin-left:-5px; margin-bottom:-4px;" src="images/specs_bottom.jpg" alt="" />
+        </div>
+
+        <br clear="all"/>
+        <br/>
+
+        $footer()
+
+        <script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>
+        <script type="text/javascript" src="http://twitter.com/statuses/user_timeline/cheetahtemplate.json?callback=twitterCallback2&count=5"></script> 
+	</body>
+</html>
+
+#def pagename()
+	#return "WikiRoot"
+#end def
+
+#def leftsidebar()
+    #return ''
+#end def
+
+#def rightsidebar()
+    <div id="twitter_div">
+        <h2 class="sidebar-title">Twitter Updates</h2>
+        <ul id="twitter_update_list"></ul>
+
+        <a href="http://twitter.com/cheetahtemplate" id="twitter-link" style="display:block;text-align:right;">follow Cheetah on Twitter</a>
+    </div>
+#end def
+
+#def header()
+    <div id="blogtitle">
+            <div id="small"><a href="#">Community Cheetah</a> </div>
+            <div id="small2">
+                #for $Name, $Link, $IsTab in $Pages
+                    #if $IsTab and not $Name == 'Home'
+                        #continue
+                    #end if
+                    <a href="$Link">$Name</a>&nbsp;|&nbsp;
+                #end for
+            </div>
+    </div>
+            
+    <div id="topmenu">
+        <ul class="BLUE">
+            #for $Name, $Link, $IsTab in $Pages
+                #if not $IsTab
+                    #continue
+                #end if
+                <li>
+                    <a href="$Link" title="$Name">
+                        <span>$Name</span>
+                    </a>
+                </li>
+            #end for
+        </ul>
+    </div>
+#end def
+
+#def footer()
+    <div id="footer">&copy; 2006 Design by <a href="http://www.studio7designs.com">Studio7designs.com</a>
+
+#*
+
+    <!-- start left boxes -->
+
+        <div class="centercontentleftb">
+            <div class="centercontentleftimg">Sample Box for Products</div>
+                <div class="centercontentrightimg">Sample Box for Products</div>
+        </div> 
+        
+        <!-- endleft boxes -->
+        
+        <!-- start right boxes -->			
+                
+        <div class="centercontentrightb">
+                <div class="centercontentleftimg">Sample Box for Products</div>
+            <div class="centercontentrightimg">Sample Box for Products</div>
+        </div>
+        
+            <!-- end right boxes -->
+
+    <!-- end bottom boxes -->
+*#
+    </div>
+#end def
+
+#def content()
+	#return ''
+#end def

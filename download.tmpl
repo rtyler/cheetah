@@ -1,0 +1,34 @@
+#import WikiRoot
+#from Cheetah.Filters import Markdown
+#extends WikiRoot.WikiRoot
+
+#def pagename()
+	#return 'Downloads'
+#end def
+
+#def content()
+#transform Markdown
+#set currentVersion = 'v2.1.0.1'
+#set releaseDate = 'March 27th, 2009'
+
+Cheetah Downloads
+=================
+
+The most recent *stable* release of Community Cheetah is **Cheetah $currentVersion** which was released
+on $releaseDate. The most recent "mainstream" release of Cheetah (i.e. from SourceForge and the original
+author) was released on November 16th, 2007 (v2.0.1).
+
+Download $currentVersion
+--------------------------
+* [$currentVersion tarball](http://github.com/rtyler/cheetah/tarball/$currentVersion)
+* [$currentVersion zip](http://github.com/rtyler/cheetah/zipball/$currentVersion)
+
+You can keep up to date with release candidates, and other misc downloads provided by Community Cheetah
+by visiting the [GitHub downloads page](http://github.com/rtyler/cheetah/downloads)
+
+
+**Important note to Windows users**: You should install the compiled version of Cheetah's NameMapper. 
+It is dramatically faster than the pure Python version! Python 2.4: _namemapper.pyd2.4, Python 2.5: _namemapper.pyd2.5. 
+Install it wherever your system puts Cheetah/NameMapper.py. Strip the version numbers off the filename.
+
+#end def
