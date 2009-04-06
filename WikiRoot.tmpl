@@ -2,13 +2,15 @@
 #extends Template
 #implements respond
 
+## (Name, Link, IsTab)
 #set global $Pages = [
-                        ('Home', 'index.html'), 
-                        ('Download', 'download.html'),
-                        ('Issues', 'http://bugs.communitycheetah.org'),
-                        ('Developers', 'developers.html'),
-                        ('Source', 'http://github.com/rtyler/cheetah/tree/master'),
-                        ('Mailing List', 'http://lists.sourceforge.net/lists/listinfo/cheetahtemplate-discuss'),
+                        ('Home', 'index.html', True), 
+                        ('Download', 'download.html', True),
+                        ('Documentation', 'docs.html', True),
+                        ('Issues', 'http://bugs.communitycheetah.org', False),
+                        ('Developers', 'developers.html', True),
+                        ('Source', 'http://github.com/rtyler/cheetah/tree/master', False),
+                        ('Mailing List', 'http://lists.sourceforge.net/lists/listinfo/cheetahtemplate-discuss', False),
                         ]
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
 <html>
@@ -78,7 +80,10 @@
     <div id="blogtitle">
             <div id="small"><a href="#">Community Cheetah</a> </div>
             <div id="small2">
-                #for $Name, $Link in $Pages
+                #for $Name, $Link, $IsTab in $Pages
+                    #if $IsTab and not $Name == 'Home'
+                        #continue
+                    #end if
                     <a href="$Link">$Name</a>&nbsp;|&nbsp;
                 #end for
             </div>
@@ -86,7 +91,10 @@
             
     <div id="topmenu">
         <ul class="BLUE">
-            #for $Name, $Link in $Pages
+            #for $Name, $Link, $IsTab in $Pages
+                #if not $IsTab
+                    #continue
+                #end if
                 <li>
                     <a href="$Link" title="$Name">
                         <span>$Name</span>

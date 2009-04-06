@@ -5,9 +5,9 @@ body {
 background:#ffffff url('images/bg.jpg') top center repeat-x;
 margin:10px 10px 0px 10px;
 padding:0px;
-color:#999999;
+color: #000;
 font-family:"Trebuchet MS",arial,sans-serif;
-font-size: 90%;
+font-size: 80%;
 
 }
 
@@ -83,10 +83,10 @@ voice-family: inherit;
 margin-left: 201px;
 margin-right:201px;
 padding:20px;
-
+font-size: 1.3em;
 }
 
-#centercontent p {color:#888;}
+#centercontent p {color:#000;}
 
 #centercontent a, a:link { color:#006633;}
 
