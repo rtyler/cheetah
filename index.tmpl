@@ -1,4 +1,5 @@
 #import WikiRoot
+#from Cheetah.Filters import Markdown
 #extends WikiRoot.WikiRoot
 
 #def pagename()
@@ -6,9 +7,20 @@
 #end def
 
 #def content()
-Welcome to the Community Cheetah Wiki
--------------------------------------
+#transform Markdown
+Community Cheetah
+=================
 
-This page was generated via the Cheetah.Filter.Markdown class and the Home.tmpl template 
-in the "wiki" branch.
+Community Cheetah is an active fork of the [Cheetah Template](http://www.cheetahtemplate.org/) engine.
+The Cheetah Templating engine is a fully [Python](http://www.python.org)-powered templating engine
+that can output or generate practically **any** text-based format (including Python itself!)
+
+The primary motivations for the Community Cheetah fork is to maintain *active* development outside of 
+the currently-stale [Cheetah CVS tree](http://sourceforge.net/scm/?type=cvs&group_id=28961). Community Cheetah
+isn't meant to diverge from the main goals of Cheetah: speed, ease of use and stability, but rather Community
+Cheetah is meant to reinvirgorate the community surrounding Cheetah and provide **monthly** releases incorporating
+patches and improvements to the engine.
+
+Cheetah already has a large and active user community, and there are a number of products built with Cheetah in the
+Fortune 500, as well startups in Silicon Valley (like [reddit](http://www.reddit.com))
 #end def
