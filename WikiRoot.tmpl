@@ -8,23 +8,24 @@
                         ('Download', 'download.html', True),
                         ('Documentation', 'docs.html', True),
                         ('Recipes', 'recipes.html', True),
-                        ('Issues', 'http://bugs.communitycheetah.org', False),
+                        ('Community', 'community.html', True),
                         ('Developers', 'developers.html', True),
+                        ('Issues', 'http://bugs.communitycheetah.org', False),
                         ('Source', 'http://github.com/rtyler/cheetah/tree/master', False),
-                        ('Mailing List', 'http://lists.sourceforge.net/lists/listinfo/cheetahtemplate-discuss', False),
                         ]
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
 <html>
-	<head>
-		<title>Community Cheetah - $pagename()</title>
-        <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
-        <meta name="keywords" content="#" />
+    <head>
+        <title>Community Cheetah - The Python-Powered Template Engine - $pagename()</title>
+        <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8"/>
+        <meta name="keywords" content="cheetah, template engine, python, community cheetah, templating, markdown, markup, mod_python, webware"/>
         <meta name="googlebot" content="index, follow" />
         <meta name="language" content="en-us, english" />
 
-        <link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen, projection, tv " />
-	</head>
-	<body>
+        <link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen, projection, tv" />
+    </head>
+    <body>
 
         $header()
 
@@ -110,6 +111,9 @@
 #end def
 
 #def footer()
+    <a href="http://www.python.org" target="_blank"><img src="images/python-logo.gif" border="0" alt="Python-powered" title="Python-powered" align="right"/></a>
+    <br clear="all"/>
+    <br/>
     <div id="footer">
         &copy; 2006 Design by <a href="http://www.studio7designs.com">Studio7designs.com</a>
 #*

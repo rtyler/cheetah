@@ -1,16 +1,17 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
 <html>
-	<head>
-		<title>Community Cheetah - Home</title>
-        <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
-        <meta name="keywords" content="#" />
+    <head>
+        <title>Community Cheetah - The Python-Powered Template Engine - Home</title>
+        <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8"/>
+        <meta name="keywords" content="cheetah, template engine, python, community cheetah, templating, markdown, markup, mod_python, webware"/>
         <meta name="googlebot" content="index, follow" />
         <meta name="language" content="en-us, english" />
 
-        <link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen, projection, tv " />
-	</head>
-	<body>
+        <link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen, projection, tv" />
+    </head>
+    <body>
 
         <a href="http://github.com/rtyler/cheetah">
     <img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png" alt="Fork me on GitHub" />
@@ -21,7 +22,6 @@
                     <a href="index.html">Home</a>&nbsp;|&nbsp;
                     <a href="http://bugs.communitycheetah.org">Issues</a>&nbsp;|&nbsp;
                     <a href="http://github.com/rtyler/cheetah/tree/master">Source</a>&nbsp;|&nbsp;
-                    <a href="http://lists.sourceforge.net/lists/listinfo/cheetahtemplate-discuss">Mailing List</a>&nbsp;|&nbsp;
             </div>
     </div>
             
@@ -48,6 +48,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="community.html" title="Community">
+                        <span>Community</span>
+                    </a>
+                </li>
+                <li>
                     <a href="developers.html" title="Developers">
                         <span>Developers</span>
                     </a>
@@ -59,49 +64,46 @@
 
         <div id="centercontent">
            <h1>Community Cheetah</h1>
-<p>Community Cheetah is an active fork of the <a href="http://www.cheetahtemplate.org/">Cheetah Template</a> engine.
-The Cheetah Templating engine is a fully <a href="http://www.python.org">Python</a>-powered templating engine
+<p>Community Cheetah is the rebirth of the <a href="http://www.cheetahtemplate.org/">Cheetah Template</a> engine.
+The Cheetah Templating engine is a <a href="http://www.python.org">Python</a>-powered templating engine
 that can output or generate practically <strong>any</strong> text-based format (including Python itself!)</p>
+<p>Cheetah already has a large and active user community, and there are a number of products built with Cheetah in the
+Fortune 500, as well startups in Silicon Valley (like <a href="http://www.slide.com">Slide</a> and <a href="http://www.yelp.com">Yelp</a>)</p>
+<h2>Cheetah in a nutshell</h2>
+<p>Below is a simple example of some Cheetah code, as you can see it's <em>pretty much</em> just Python. You can import, inherit and 
+define methods just like in a regular Python module, since that's what your Cheetah templates are compiled to :)</p>
+<pre><code>#from Cheetah.Template import Template
+#extends Template
+
+#set $people = [{'name' : 'Tom', 'mood' : 'Happy'}, {'name' : 'Dick', 'mood' : 'Sad'}, {'name' : 'Harry', 'mood' : 'Hairy'}]
+&lt;strong&gt;How are you feeling?&lt;/strong&gt;
+&lt;ul&gt;
+#for $person in $people
+    &lt;li&gt;
+        $person['name'] is $person['mood']
+    &lt;/li&gt;
+#end for
+&lt;/ul&gt;
+</code></pre>
+<h2>Why should I use Cheetah?</h2>
+<ul>
+<li>Cheetah is supported by every major Python web framework.</li>
+<li>It is fully documented and is supported by an active user community.</li>
+<li>It can output/generate any text-based format.</li>
+<li>Cheetah compiles templates into optimized, yet readable, Python code.</li>
+<li>It blends the power and flexibility of Python with a simple template language that non-programmers can understand. </li>
+<li>It gives template authors full access to any Python data structure, module, function, object, or method in their templates. Meanwhile, it provides a way for administrators to selectively restrict access to Python when needed. </li>
+<li>Cheetah makes code reuse easy by providing an object-oriented interface to templates that is accessible from Python code or other Cheetah templates. One template can subclass another and selectively reimplement sections of it. Cheetah templates can be subclasses of any Python class and vice-versa. </li>
+<li>It provides a simple, yet powerful, caching mechanism that can dramatically improve the performance of a dynamic website. </li>
+<li>It encourages clean separation of content, graphic design, and program code. This leads to highly modular, flexible, and reusable site architectures, shorter development time, and HTML and program code that is easier to understand and maintain. It is particularly well suited for team efforts. </li>
+<li>Cheetah can be used to generate static html via its command-line tool.</li>
+</ul>
+<h2>Why Community Cheetah?</h2>
 <p>The primary motivations for the Community Cheetah fork is to maintain <em>active</em> development outside of 
 the currently-stale <a href="http://sourceforge.net/scm/?type=cvs&amp;group_id=28961">Cheetah CVS tree</a>. Community Cheetah
 isn't meant to diverge from the main goals of Cheetah: speed, ease of use and stability, but rather Community
 Cheetah is meant to reinvirgorate the community surrounding Cheetah and provide <strong>monthly</strong> releases incorporating
 patches and improvements to the engine.</p>
-<p>Cheetah already has a large and active user community, and there are a number of products built with Cheetah in the
-Fortune 500, as well startups in Silicon Valley (like <a href="http://www.slide.com">Slide</a> and <a href="http://www.yelp.com">Yelp</a>)</p>
-<h2>Why should I use Cheetah?</h2>
-<ul>
-<li>
-<p>Cheetah is supported by every major Python web framework.</p>
-</li>
-<li>
-<p>It is fully documented and is supported by an active user community.</p>
-</li>
-<li>
-<p>It can output/generate any text-based format.</p>
-</li>
-<li>
-<p>Cheetah compiles templates into optimized, yet readable, Python code.</p>
-</li>
-<li>
-<p>It blends the power and flexibility of Python with a simple template language that non-programmers can understand. </p>
-</li>
-<li>
-<p>It gives template authors full access to any Python data structure, module, function, object, or method in their templates. Meanwhile, it provides a way for administrators to selectively restrict access to Python when needed. </p>
-</li>
-<li>
-<p>Cheetah makes code reuse easy by providing an object-oriented interface to templates that is accessible from Python code or other Cheetah templates. One template can subclass another and selectively reimplement sections of it. Cheetah templates can be subclasses of any Python class and vice-versa. </p>
-</li>
-<li>
-<p>It provides a simple, yet powerful, caching mechanism that can dramatically improve the performance of a dynamic website. </p>
-</li>
-<li>
-<p>It encourages clean separation of content, graphic design, and program code. This leads to highly modular, flexible, and reusable site architectures, shorter development time, and HTML and program code that is easier to understand and maintain. It is particularly well suited for team efforts. </p>
-</li>
-<li>
-<p>Cheetah can be used to generate static html via its command-line tool.</p>
-</li>
-</ul>
         </div>
 
         <div id="rightcontent">
@@ -121,8 +123,11 @@ Fortune 500, as well startups in Silicon Valley (like <a href="http://www.slide.
         <br clear="all"/>
         <br/>
 
-            <div id="footer">&copy; 2006 Design by <a href="http://www.studio7designs.com">Studio7designs.com</a>
-
+            <a href="http://www.python.org" target="_blank"><img src="images/python-logo.gif" border="0" alt="Python-powered" title="Python-powered" align="right"/></a>
+    <br clear="all"/>
+    <br/>
+    <div id="footer">
+        &copy; 2006 Design by <a href="http://www.studio7designs.com">Studio7designs.com</a>
     </div>
 
 
