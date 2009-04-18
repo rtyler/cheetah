@@ -11,13 +11,26 @@ font-size: 80%;
 
 }
 
+body a:link, body a:visited {
+	color: blue;
+}
+
 #blogtitle{
 width:100%;	
 margin:0px auto;
 padding:0 0 5px 0;
 font-size:1.1em;
 line-height:1.2em;
+}
 
+#blogtitle a:link, a:visited {
+	color:#b8ce83;
+	text-decoration:none;
+}
+
+#blogtitle a:hover, a:active {
+	color:#fff;
+	text-decoration:none;
 }
 
 #small{
@@ -32,18 +45,6 @@ float:right;
 margin-top: -15px;
 
 }
-
-#blogtitle a:link, a:visited{
-color:#b8ce83;
-text-decoration:none;
-}
-
-#blogtitle a:hover, a:active{
-color:#fff;
-text-decoration:none;
-
-}
-
 
 UL.BLUE {
 list-style: url(images/bullet.jpg) disc;
@@ -67,11 +68,6 @@ padding-top: 8px;
 
 #leftcontent p{padding-right:10px; margin-left: 5px; color:#888; font-size:1em;}
 
-#leftcontent a, a:link { color:#888; font-weight:500;}
-
-#leftcontent a:hover, a:active{ color:#FF6666;}
-
-
 #centercontent {
 margin-top: 37px;
 background:#fff;
@@ -87,11 +83,6 @@ font-size: 1.3em;
 }
 
 #centercontent p {color:#000;}
-
-#centercontent a, a:link { color:#006633;}
-
-#centercontent a:hover, a:active{ color:#FF6666;}
-
 
 html>body #centercontent {
 margin-left: 201px;
@@ -118,16 +109,9 @@ margin-top:150px;
 padding-left: 5px;
 padding-right: 8px;
 padding-top: 8px;
-
 }
 
-
 #rightcontent p {color:#888;}
-
-#rightcontent a, a:link { color:#888; font-weight:600;}
-
-#rightcontent a:hover, a:active{ color:#FF6666;}
-
 
 #banner {
 background:#fff;
@@ -138,12 +122,10 @@ height:39px;
 
 }
 
-
 html>body #banner {
 height:39px;
 
 }
-
 
 p,h1,pre {
 margin:0px 10px 10px 10px;
@@ -186,11 +168,6 @@ list-style: none;
 margin: 0;
 padding: 0;
 
-}
-
-.introduction a {
-border-bottom: none;
-color:#999999;
 }
 
 .introduction h3{
