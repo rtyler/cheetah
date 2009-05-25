@@ -1,10 +1,13 @@
 #import os
+#From Cheetah.Template import Template
 #from Cheetah.Filters import Markdown
 
 #import WikiRoot
 #extends WikiRoot.WikiRoot
 
 #attr PathPrefix = '../'
+#attr ExecuteContentPath = 'recipes/content/'
+#attr HyperlinkContentPath = 'content/'
 
 #def pagename()
     #return 'Recipes'
@@ -17,16 +20,10 @@ Cheetah Recipes
 
 Here are the available recipes thus far:
 
-## A short note about BaseDirectory, when the HTML files are being generated, the 
-## "current working directory is the Git root (i.e. ../ from this file) 
-##
-## When the page is being loaded however, the "current working directory" is the 
-## "recipes/" directory
-#set $BaseDirectory = 'content/'
-#for dirpath, dirnames, filenames in $os.walk('recipes/%s' % $BaseDirectory)
+#for dirpath, dirnames, filenames in $os.walk($ExecuteContentPath)
     #for file in filenames
-        #if file.endswith('.html')
-* [${file.replace('_', ' ').replace('.html', '')}](${BaseDirectory}${file})
+        #if file.endswith('.markdown') and $generateRecipePage($file)
+* [${file.replace('_', ' ').replace('.markdown', '')}](${HyperlinkContentPath}${file.replace('.markdown', '.html')})
         #end if
     #end for
 #end for 
@@ -35,4 +32,28 @@ Here are the available recipes thus far:
 If you're really hungry for some Cheetah recipies, you can check out the 
 out-of-date [Cheetah recipes page](http://wiki.cheetahtemplate.org/cheetah-recipes.html?) 
 from the old Wiki
+#end def
+
+#def generateRecipePage(filepath)
+    #set fd = $open('%s%s' % ($ExecuteContentPath, $filepath), 'r')
+    #set content = $fd.readlines()
+    #silent $fd.close()
+    #set tmpl = Template('''
+        #from Cheetah.Filters import Markdown
+        #import WikiRoot
+        #extends WikiRoot.WikiRoot
+        #attr PathPrefix = '../../'
+        #def pagename()
+            #return $PageName
+        #end def
+
+        #def content
+        #transform Markdown
+            $recipe
+        #end def
+    ''', searchList=[{'PageName' : $filepath.replace('.markdown', ''), 'recipe' : ''.join($content)}])
+    #set fd = open('%s%s' % ($ExecuteContentPath, $filepath.replace('.markdown', '.html')), 'w')
+    #silent fd.write(unicode(tmpl).encode('utf-8'))
+    #silent fd.close()
+    #return True
 #end def
