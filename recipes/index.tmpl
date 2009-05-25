@@ -39,18 +39,18 @@ from the old Wiki
     #set content = $fd.readlines()
     #silent $fd.close()
     #set tmpl = Template('''
-        #from Cheetah.Filters import Markdown
-        #import WikiRoot
-        #extends WikiRoot.WikiRoot
-        #attr PathPrefix = '../../'
-        #def pagename()
-            #return $PageName
-        #end def
+#from Cheetah.Filters import Markdown
+#import WikiRoot
+#extends WikiRoot.WikiRoot
+#attr PathPrefix = '../../'
+#def pagename()
+    #return $PageName
+#end def
 
-        #def content
-        #transform Markdown
-            $recipe
-        #end def
+#def content
+#transform Markdown
+$recipe
+#end def
     ''', searchList=[{'PageName' : $filepath.replace('.markdown', ''), 'recipe' : ''.join($content)}])
     #set fd = open('%s%s' % ($ExecuteContentPath, $filepath.replace('.markdown', '.html')), 'w')
     #silent fd.write(unicode(tmpl).encode('utf-8'))
