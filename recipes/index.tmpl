@@ -1,5 +1,7 @@
-#import WikiRoot
+#import os
 #from Cheetah.Filters import Markdown
+
+#import WikiRoot
 #extends WikiRoot.WikiRoot
 
 #attr PathPrefix = '../'
@@ -13,7 +15,22 @@
 Cheetah Recipes
 ===============
 
-This page hasn't been fully fleshed out unfortunately :(
+Here are the available recipes thus far:
+
+## A short note about BaseDirectory, when the HTML files are being generated, the 
+## "current working directory is the Git root (i.e. ../ from this file) 
+##
+## When the page is being loaded however, the "current working directory" is the 
+## "recipes/" directory
+#set $BaseDirectory = 'content/'
+#for dirpath, dirnames, filenames in $os.walk('recipes/%s' % $BaseDirectory)
+    #for file in filenames
+        #if file.endswith('.html')
+* [${file.replace('_', ' ').replace('.html', '')}](${BaseDirectory}${file})
+        #end if
+    #end for
+#end for 
+
 
 If you're really hungry for some Cheetah recipies, you can check out the 
 out-of-date [Cheetah recipes page](http://wiki.cheetahtemplate.org/cheetah-recipes.html?) 
