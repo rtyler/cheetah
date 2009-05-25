@@ -2,6 +2,8 @@
 #extends Template
 #implements respond
 
+#attr PathPrefix = ''
+
 ## (Name, Link, IsTab)
 #set global $Pages = [
                         ('Home', 'index.html', True), 
@@ -23,20 +25,19 @@
         <meta name="keywords" content="cheetah, template engine, python, community cheetah, templating, markdown, markup, mod_python, webware"/>
         <meta name="googlebot" content="index, follow" />
         <meta name="language" content="en-us, english" />
-
-        <link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen, projection, tv" />
     </head>
     <body>
+        $css()
 
         $header()
 
         #if $leftsidebar()
             <div id="leftcontent">
-                <img style="margin-top:-9px; margin-left:-12px;" src="images/top2.jpg" alt="" />
+                <img style="margin-top:-9px; margin-left:-12px;" src="${PathPrefix}images/top2.jpg" alt="" />
 
                 $leftsidebar()
 
-                <img style="padding-top:2px; margin-left:-12px; margin-bottom:-4px;" src="images/specs_bottom.jpg" alt="" />
+                <img style="padding-top:2px; margin-left:-12px; margin-bottom:-4px;" src="${PathPrefix}images/specs_bottom.jpg" alt="" />
             </div>
         #end if
 
@@ -45,11 +46,11 @@
         </div>
 
         <div id="rightcontent">
-            <img style="margin-top:-9px; margin-left: -5px;" src="images/top2.jpg" alt="" />
+            <img style="margin-top:-9px; margin-left: -5px;" src="${PathPrefix}images/top2.jpg" alt="" />
             
             $rightsidebar()
 
-            <img style="padding-top:5px; margin-left:-5px; margin-bottom:-4px;" src="images/specs_bottom.jpg" alt="" />
+            <img style="padding-top:5px; margin-left:-5px; margin-bottom:-4px;" src="${PathPrefix}images/specs_bottom.jpg" alt="" />
         </div>
 
         <br clear="all"/>
@@ -90,7 +91,7 @@
                     #if $IsTab and not $Name == 'Home'
                         #continue
                     #end if
-                    <a href="$Link">$Name</a>&nbsp;|&nbsp;
+                    <a href="${PathPrefix}${Link}">$Name</a>&nbsp;|&nbsp;
                 #end for
             </div>
     </div>
@@ -102,7 +103,7 @@
                     #continue
                 #end if
                 <li>
-                    <a href="$Link" title="$Name">
+                    <a href="${PathPrefix}${Link}" title="${Name}">
                         <span>$Name</span>
                     </a>
                 </li>
@@ -112,7 +113,7 @@
 #end def
 
 #def footer()
-    <a href="http://www.python.org" target="_blank"><img src="images/python-logo.gif" border="0" alt="Python-powered" title="Python-powered" align="right"/></a>
+    <a href="http://www.python.org" target="_blank"><img src="${PathPrefix}images/python-logo.gif" border="0" alt="Python-powered" title="Python-powered" align="right"/></a>
     <br clear="all"/>
     <br/>
     <div id="footer">
@@ -140,6 +141,18 @@
     <!-- end bottom boxes -->
 *#
     </div>
+#end def
+
+#def _css()
+	#include raw "./stylesheet.css"
+#end def
+
+#def css()
+    <style type="text/css">
+    <!--
+        $_css().replace('images', '%simages' % ($PathPrefix))
+    -->
+    </style>
 #end def
 
 #def content()

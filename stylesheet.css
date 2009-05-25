@@ -206,7 +206,7 @@ margin:0;
 padding:0 0 0 4px;
 text-decoration:none;
 }
-#topmenu a span {
+#topmenu a span, a:visited span {
 float:left;
 display:block;
 background:url(images/menuright.gif) no-repeat right top;
