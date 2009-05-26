@@ -377,15 +377,34 @@ Python.</p>
 <p>Whether or not you are aware of it, Cheetah templates are always inheriting from 
 a Python class by default. Unless otherwise denoted, Cheetah templates are compiled 
 to Python classes that subclass from the Cheetah.Template.Template class.</p>
-<pre><code>import Cheetah.Template
-
-class CookbookTemplate(Cheetah.Template.Template):
-    _page = 'Cookbook'
-    author = 'R. Tyler Ballance'
-    def pageName(self):
-        retutn self._page or 'Unknown'
-</code></pre>
-<p>End</p>
+<style type="text/css"> <!-- .code_highlighter .hll { background-color: #ffffcc }
+.code_highlighter  { background: #f8f8f8; }
+.code_highlighter .c { color: #408080; font-style: italic } /* Comment */
+.code_highlighter .err { border: 1px solid #FF0000 } /* Error */
+.code_highlighter .k { color: #008000; font-weight: bold } /* Keyword */
+.code_highlighter .o { color: #666666 } /* Operator */
+.code_highlighter .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.code_highlighter .cp { color: #BC7A00 } /* Comment.Preproc */
+.code_highlighter .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.code_highlighter .cs { color: #408080; font-style: italic } /* Comment.Special */
+.code_highlighter .gd { color: #A00000 } /* Generic.Deleted */
+.code_highlighter .ge { font-style: italic } /* Generic.Emph */
+.code_highlighter .gr { color: #FF0000 } /* Generic.Error */
+.code_highlighter .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.code_highlighter .gi { color: #00A000 } /* Generic.Inserted */
+.code_highlighter .go { color: #808080 } /* Generic.Output */
+.code_highlighter .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.code_highlighter .gs { font-weight: bold } /* Generic.Strong */
+.code_highlighter .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.code_highlighter .gt { color: #0040D0 } /* Generic.Traceback */
+.code_highlighter .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.code_highlighter .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.code_highlighter .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.code_highlighter .kp { color: #008000 } /* Keyword.Pseudo */
+.code_highlighter .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.code_highlighter .kt { color: #B00040 } /* Keyword.Type */
+.code_highlighter .m { color: #666666 } /* Literal.Number */
+.code_highlighter .s { color: #BA2121 } /* Literal.String
         </div>
 
         <div id="rightcontent">

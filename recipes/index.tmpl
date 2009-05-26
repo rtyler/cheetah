@@ -1,3 +1,8 @@
+#compiler-settings 
+useAutocalling=False
+useLegacyImportMode=False
+#end compiler-settings
+
 #import os
 #From Cheetah.Template import Template
 #from Cheetah.Filters import Markdown
@@ -35,11 +40,30 @@ from the old Wiki
 #end def
 
 #def generateRecipePage(filepath)
-    #set fd = $open('%s%s' % ($ExecuteContentPath, $filepath), 'r')
-    #set content = $fd.readlines()
-    #silent $fd.close()
+    ## Defining a highlighting function to macro-fy
+    #def _highlightMacro(src)
+        #from pygments import highlight
+        #from pygments import lexers 
+        #from pygments import formatters
+        #set lexer = None
+        #try
+            #set lexer = lexers.guess_lexer(src)
+        #except lexers.ClassNotFound
+            #set lexer = lexers.PythonLexer()
+        #end try
+
+        #set formatter = formatters.HtmlFormatter(cssclass='code_highlighter')
+        #set src = highlight(src, lexer, formatter)
+        #set css = formatter.get_style_defs('.code_highlighter')
+        #return '''<style type="text/css"> <!-- %s --> </style> %s''' % (css, src)
+    #end def
+
+    ## Open and read in the .markdown document 
+    #set fd = open('%s%s' % ($ExecuteContentPath, filepath), 'r')
+    #set content = fd.readlines()
+    #silent fd.close()
+
     #set tmpl = Template('''
-#import Cheetah.Filters
 #from Cheetah.Filters import Markdown
 #import WikiRoot
 #extends WikiRoot.WikiRoot
@@ -52,10 +76,15 @@ from the old Wiki
 #transform Markdown
 %s
 #end def
-    ''' % (''.join($content)), searchList=[{'PageName' : $filepath.replace('.markdown', '')}])
-    #set fd = open('%s%s' % ($ExecuteContentPath, $filepath.replace('.markdown', '.html')), 'w')
+    ''' % (''.join(content)), 
+            searchList=[{'PageName' : filepath.replace('.markdown', '')}],
+            compilerSettings={'macroDirectives' : {'highlight' : _highlightMacro}})
+
+    ## Write the results of the template's execution to a .html file
+    #set fd = open('%s%s' % ($ExecuteContentPath, filepath.replace('.markdown', '.html')), 'w')
     #silent fd.write(unicode(tmpl).encode('utf-8'))
     #silent fd.close()
+
     #return True
 #end def
 
