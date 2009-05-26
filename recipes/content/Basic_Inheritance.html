@@ -352,6 +352,40 @@ border:dashed 1px #888;  padding:6px; font-size:1.1em; color:#fff;}
 
         <div id="centercontent">
            <h1>Basic Inheritance</h1>
+<h2>Introduction</h2>
+<p>Cheetah, like Python, is an object-oriented language if you so choose to 
+use it in that fashion. That is to say that you can use Cheetah in with 
+object-oriented principles <em>or</em> you can use Cheetah in a strictly functional
+sense, like Python, Cheetah does not place restrictions on these barriers.</p>
+<p>While Cheetah is not strictly Python, it was designed as such to interoperate,
+particularly with the notion of classes, with Python itself. In effect you can 
+define Python classes that inherit and extend from Cheetah-derived classes and 
+vice versa. For this, Cheetah defines a few <strong>directives</strong> (denoted with the <code>#</code> 
+hash-mark) that are of some help, the most important one being the <code>#extends</code>
+directive, with others playing important roles like <code>#import</code>, <code>#attr</code> and <code>#super</code></p>
+<p>In this recipe/tutorial I intend to explain and define a few key inheritance
+patterns with Cheetah, being:</p>
+<ul>
+<li>A Cheetah Template inheriting from Python</li>
+<li>Python inheriting from a Cheetah Template</li>
+<li>Cheetah Templates and "<em>mixins</em>"</li>
+</ul>
+<p>This document also operates on the assumption that the reader is at least 
+somewhat familiar with the basic tenets of object-oriented programming in 
+Python.</p>
+<h2>Cheetah inheriting from Python</h2>
+<p>Whether or not you are aware of it, Cheetah templates are always inheriting from 
+a Python class by default. Unless otherwise denoted, Cheetah templates are compiled 
+to Python classes that subclass from the Cheetah.Template.Template class.</p>
+<pre><code>import Cheetah.Template
+
+class CookbookTemplate(Cheetah.Template.Template):
+    _page = 'Cookbook'
+    author = 'R. Tyler Ballance'
+    def pageName(self):
+        retutn self._page or 'Unknown'
+</code></pre>
+<p>End</p>
         </div>
 
         <div id="rightcontent">

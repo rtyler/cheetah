@@ -39,6 +39,7 @@ from the old Wiki
     #set content = $fd.readlines()
     #silent $fd.close()
     #set tmpl = Template('''
+#import Cheetah.Filters
 #from Cheetah.Filters import Markdown
 #import WikiRoot
 #extends WikiRoot.WikiRoot
@@ -49,11 +50,12 @@ from the old Wiki
 
 #def content
 #transform Markdown
-$recipe
+%s
 #end def
-    ''', searchList=[{'PageName' : $filepath.replace('.markdown', ''), 'recipe' : ''.join($content)}])
+    ''' % (''.join($content)), searchList=[{'PageName' : $filepath.replace('.markdown', '')}])
     #set fd = open('%s%s' % ($ExecuteContentPath, $filepath.replace('.markdown', '.html')), 'w')
     #silent fd.write(unicode(tmpl).encode('utf-8'))
     #silent fd.close()
     #return True
 #end def
+
