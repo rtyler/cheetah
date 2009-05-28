@@ -40,24 +40,6 @@ from the old Wiki
 #end def
 
 #def generateRecipePage(filepath)
-    ## Defining a highlighting function to macro-fy
-    #def _highlightMacro(src)
-        #from pygments import highlight
-        #from pygments import lexers 
-        #from pygments import formatters
-        #set lexer = None
-        #try
-            #set lexer = lexers.guess_lexer(src)
-        #except lexers.ClassNotFound
-            #set lexer = lexers.PythonLexer()
-        #end try
-
-        #set formatter = formatters.HtmlFormatter(cssclass='code_highlighter')
-        #set src = highlight(src, lexer, formatter)
-        #set css = formatter.get_style_defs('.code_highlighter')
-        #return '''<style type="text/css"> <!-- %s --> </style> %s''' % (css, src)
-    #end def
-
     ## Open and read in the .markdown document 
     #set fd = open('%s%s' % ($ExecuteContentPath, filepath), 'r')
     #set content = fd.readlines()
@@ -77,8 +59,7 @@ from the old Wiki
 %s
 #end def
     ''' % (''.join(content)), 
-            searchList=[{'PageName' : filepath.replace('.markdown', '')}],
-            compilerSettings={'macroDirectives' : {'highlight' : _highlightMacro}})
+            searchList=[{'PageName' : filepath.replace('.markdown', '')}])
 
     ## Write the results of the template's execution to a .html file
     #set fd = open('%s%s' % ($ExecuteContentPath, filepath.replace('.markdown', '.html')), 'w')
