@@ -33,12 +33,10 @@ Whether or not you are aware of it, Cheetah templates are always inheriting from
 a Python class by default. Unless otherwise denoted, Cheetah templates are compiled 
 to Python classes that subclass from the Cheetah.Template.Template class.
 
-#highlight
-import Cheetah.Template
+    import Cheetah.Template
 
-class CookbookTemplate(Cheetah.Template.Template):
-    _page = 'Cookbook'
-    author = 'R. Tyler Ballance'
-    def pageName(self):
-        return self._page or 'Unknown'
-#end highlight
+    class CookbookTemplate(Cheetah.Template.Template):
+        _page = 'Cookbook'
+        author = 'R. Tyler Ballance'
+        def pageName(self):
+            return self._page or 'Unknown'
