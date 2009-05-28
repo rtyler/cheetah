@@ -358,7 +358,45 @@ a lot of options when it comes to utilizing Cheetah, particularly in web environ
 <p>There is added speed to be gained by using pre-compiled templates, especially when
 using mod_python with Apache. Precompiling your templates means Apache/mod_python
 can load your template's generated module into memory and then execution is only
-limited by the speed of the Python being executed, and not the Cheetah compiler.</p>
+limited by the speed of the Python being executed, and not the Cheetah compiler.
+You can further optimize things by then pre-compiling the generated Python files 
+(.py) down to Python byte-code (.pyc) so save cycles interpreting the Python.</p>
+<h2>Basic Pre-compilation</h2>
+<p>Suppose you have a template that looks something like this:</p>
+<pre><code>#attr title = "This is my Template"
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;${title}&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        Hello ${who}!
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><strong>Figure 1. hello.tmpl</strong></p>
+<p>In order to compile this down to a Python file, you need to only execute the 
+<code>cheetah compile hello.tmpl</code> command. The results will be a Python file (.py) 
+which you can then treat as any other Python module in your code base.</p>
+<h2>Importing and lookup</h2>
+<p>Typically for the template in <em>Figure 1</em>, I could easily import it post-compilation
+as any other Python module:</p>
+<pre><code>from templates import hello
+
+def myMethod():
+    tmpl = hello.hello(searchList=[{'who' : 'world'}])
+    results = tmpl.respond()
+</code></pre>
+<p><strong>Figure 2. runner.py</strong></p>
+<p><em>Note:</em> If you use the <code>#implements</code> directive, <code>respond</code> may not be your "main 
+method" for executing the Cheetah template. You can adjust the example above in 
+<em>Figure 2</em> by using <code>getattr()</code> to make the lookup of the main method dynamic:</p>
+<pre><code>def myMethod():
+    tmpl = hello.hello(searchList=[{'who' : 'world'}])
+    mainMethod = getattr(tmpl, '_mainCheetahMethod_for_%s' % tmpl.__class__.__name__)
+    results = getattr(tmpl, mainMethod)()
+</code></pre>
+<p><strong>Figure 3. Dynamic runner.py</strong></p>
+<h3>Even more advanced lookup</h3>
         </div>
 
         <div id="rightcontent">
