@@ -31,7 +31,10 @@ Cheetah inheriting from Python
 ------------------------------
 Whether or not you are aware of it, Cheetah templates are always inheriting from 
 a Python class by default. Unless otherwise denoted, Cheetah templates are compiled 
-to Python classes that subclass from the Cheetah.Template.Template class.
+to Python classes that subclass from the `Cheetah.Template.Template` class.
+
+What if you would like to introduce your own Template base class? Easily acheived by
+defining your own Template class in a Python module, for example:
 
     import Cheetah.Template
 
@@ -40,3 +43,18 @@ to Python classes that subclass from the Cheetah.Template.Template class.
         author = 'R. Tyler Ballance'
         def pageName(self):
             return self._page or 'Unknown'
+**Figure 1. cookbook.py**
+
+For this example, I want all my subclasses of the `CookbookTemplate` to define a 
+page author which will be used in some shared rendering code, to accomplish this
+my templates will need to subclass from `CookbookTemplate` explicitly instead of 
+implicitly subclassing from `Cheetah.Template.Template`
+
+    \#import cookbook
+    \#extends cookbook.CookbookTemplate
+    \#attr author = 'Tavis Rudd'
+
+    \#\# The rest of my recipe template would be below
+**Figure 2. recipe1.tmpl**
+
+

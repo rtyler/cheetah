@@ -4,6 +4,7 @@ useLegacyImportMode=False
 #end compiler-settings
 
 #import os
+#import time
 #From Cheetah.Template import Template
 #from Cheetah.Filters import Markdown
 
@@ -57,9 +58,13 @@ from the old Wiki
 #def content
 #transform Markdown
 %s
+
+
+
+<span style="float: right; clear: both;">*Last edited: $Edited *</span>
 #end def
     ''' % (''.join(content)), 
-            searchList=[{'PageName' : filepath.replace('.markdown', '')}])
+            searchList=[{'Edited' : time.ctime(), 'PageName' : filepath.replace('.markdown', '')}])
 
     ## Write the results of the template's execution to a .html file
     #set fd = open('%s%s' % ($ExecuteContentPath, filepath.replace('.markdown', '.html')), 'w')
