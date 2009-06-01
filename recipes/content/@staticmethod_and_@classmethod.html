@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
 <html>
     <head>
-        <title>Community Cheetah - The Python-Powered Template Engine - Precompiled_Templates</title>
+        <title>Community Cheetah - The Python-Powered Template Engine - @staticmethod_and_@classmethod</title>
         <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8"/>
         <meta name="keywords" content="cheetah, template engine, python, community cheetah, templating, markdown, markup, mod_python, webware"/>
         <meta name="googlebot" content="index, follow" />
@@ -351,51 +351,49 @@ border:dashed 1px #888;  padding:6px; font-size:1.1em; color:#fff;}
 
 
         <div id="centercontent">
-           <h1>Precompiled Templates</h1>
-<h2>Why bother?</h2>
-<p>Since Cheetah supports two basic modes: dynamic and precompiled templates, you have 
-a lot of options when it comes to utilizing Cheetah, particularly in web environments.</p>
-<p>There is added speed to be gained by using pre-compiled templates, especially when
-using mod_python with Apache. Precompiling your templates means Apache/mod_python
-can load your template's generated module into memory and then execution is only
-limited by the speed of the Python being executed, and not the Cheetah compiler.
-You can further optimize things by then pre-compiling the generated Python files 
-(.py) down to Python byte-code (.pyc) so save cycles interpreting the Python.</p>
-<h2>Basic Pre-compilation</h2>
-<p>Suppose you have a template that looks something like this:</p>
-<pre><code>#attr title = "This is my Template"
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;title&gt;${title}&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        Hello ${who}!
-    &lt;/body&gt;
-&lt;/html&gt;
+           <h1>@staticmethod and @classmethod</h1>
+<p>Refer the Python's documentation if you're unfamiliar with either 
+<a href="http://docs.python.org/library/functions.html#staticmethod">@staticmethod</a> or <a href="http://docs.python.org/library/functions.html#classmethod">@classmethod</a> and their uses in Python, as they
+pertain to their uses in Cheetah as well. Using <a href="http://docs.python.org/library/functions.html#staticmethod">@staticmethod</a> it's 
+trivial to create <em>utility templates</em> which are common when using 
+Cheetah for web development. These <em>utility templates</em> might contain
+a number of small functions which generate useful snippets of markup.</p>
+<p>For example:</p>
+<pre><code>#def copyright()
+    #import time
+    &amp;copy; CheetahCorp, Inc. $time.strftime('%Y', time.gmtime())
+#end def
 </code></pre>
-<p><strong>Figure 1. hello.tmpl</strong></p>
-<p>In order to compile this down to a Python file, you need to only execute the 
-<code>cheetah compile hello.tmpl</code> command. The results will be a Python file (.py) 
-which you can then treat as any other Python module in your code base.</p>
-<h2>Importing and lookup</h2>
-<p>Typically for the template in <em>Figure 1</em>, I could easily import it post-compilation
-as any other Python module:</p>
-<pre><code>from templates import hello
+<p><strong>Figure 1, util.tmpl</strong></p>
+<p>Prior to version <strong>v2.2.0</strong> of Cheetah, there wasn't really an easy means
+of filling templates with bunches of these small utility functions. In 
+<strong>v2.2.0</strong> however, you can decorate these methods with <code>#@staticmethod</code> 
+and use "proper" Python syntax for calling them, <strong>fig 1</strong> revisited:</p>
+<pre><code>#@staticmethod
+#def copyright()
+    #import time
+    &amp;copy; CheetahCorp, Inc. $time.strftime('%Y', time.gmtime())
+#end def
+</code></pre>
+<p><strong>Figure 1.1, util.tmpl</strong></p>
+<p>With the addition of the <a href="http://docs.python.org/library/functions.html#staticmethod">@staticmethod</a> decorator, the <code>copyright()</code> 
+function can now be used without instantiating an instance of the <code>util</code>
+template class. In effect:</p>
+<pre><code>#from util import util
 
-def myMethod():
-    tmpl = hello.hello(searchList=[{'who' : 'world'}])
-    results = tmpl.respond()
+&lt;strong&gt;This is my page&lt;/strong&gt;
+&lt;br/&gt;
+&lt;hr noshade/&gt;
+$util.copyright()
 </code></pre>
-<p><strong>Figure 2. runner.py</strong></p>
-<p><em>Note:</em> If you use the <code>#implements</code> directive, <code>respond</code> may not be your "main 
-method" for executing the Cheetah template. You can adjust the example above in 
-<em>Figure 2</em> by using <code>getattr()</code> to make the lookup of the main method dynamic:</p>
-<pre><code>def myMethod():
-    tmpl = hello.hello(searchList=[{'who' : 'world'}])
-    mainMethod = getattr(tmpl, '_mainCheetahMethod_for_%s' % tmpl.__class__.__name__)
-    results = getattr(tmpl, mainMethod)()
-</code></pre>
-<p><strong>Figure 3. Dynamic runner.py</strong></p>
+<p><strong>Figure 2, index.tmpl</strong></p>
+<p>This approach is however no means to structure anything complex, 
+<a href="http://docs.python.org/library/functions.html#staticmethod">@staticmethod</a> and <a href="http://docs.python.org/library/functions.html#classmethod">@classmethod</a> use in Cheetah is not meant as a 
+replacement for properly structured class hierarchies (which 
+Cheetah supports). That said if you are building a web application
+<a href="http://docs.python.org/library/functions.html#staticmethod">@staticmethod</a>/<a href="http://docs.python.org/library/functions.html#classmethod">@classmethod</a> are quite useful for the little snippets 
+of markup, etc that are needed (Google AdSense blocks, footers, 
+banners, etc).</p>
 <p><span style="float: right; clear: both;"><em>Last edited: Sun May 31 18:40:24 2009 </em></span></p>
         </div>
 
