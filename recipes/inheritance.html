@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Basic Inheritance &mdash; Cheetah - The Python-Powered Template Engine</title>
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.2.1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Cheetah - The Python-Powered Template Engine" href="../index.html" />
+    <link rel="up" title="User Documentation" href="../documentation.html" />
+    <link rel="next" title="Precompiled Templates" href="precompiled.html" />
+    <link rel="prev" title="User Documentation" href="../documentation.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="precompiled.html" title="Precompiled Templates"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../documentation.html" title="User Documentation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Cheetah - The Python-Powered Template Engine</a> &raquo;</li>
+          <li><a href="../documentation.html" accesskey="U">User Documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">Basic Inheritance</a><ul>
+<li><a class="reference external" href="#introduction">Introduction</a></li>
+<li><a class="reference external" href="#cheetah-inheriting-from-python">Cheetah inheriting from Python</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="../documentation.html"
+                                  title="previous chapter">User Documentation</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="precompiled.html"
+                                  title="next chapter">Precompiled Templates</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../sources/recipes/inheritance.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="basic-inheritance">
+<h1>Basic Inheritance<a class="headerlink" href="#basic-inheritance" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Cheetah, like Python, is an object-oriented language if you so choose to
+use it in that fashion. That is to say that you can use Cheetah in with
+object-oriented principles <em>or</em> you can use Cheetah in a strictly functional
+sense, like Python, Cheetah does not place restrictions on these barriers.</p>
+<p>While Cheetah is not strictly Python, it was designed as such to interoperate,
+particularly with the notion of classes, with Python itself. In effect you can
+define Python classes that inherit and extend from Cheetah-derived classes and
+vice versa. For this, Cheetah defines a few <strong>directives</strong> (denoted with the <cite>#</cite>
+hash-mark) that are of some help, the most important one being the <cite>#extends</cite>
+directive, with others playing important roles like <cite>#import</cite>, <cite>#attr</cite> and <cite>#super</cite></p>
+<p>In this recipe/tutorial I intend to explain and define a few key inheritance
+patterns with Cheetah, being:</p>
+<ul class="simple">
+<li>A Cheetah Template inheriting from Python</li>
+<li>Python inheriting from a Cheetah Template</li>
+<li>Cheetah Templates and &#8220;<em>mixins</em>&#8220;</li>
+</ul>
+<p>This document also operates on the assumption that the reader is at least
+somewhat familiar with the basic tenets of object-oriented programming in
+Python.</p>
+</div>
+<div class="section" id="cheetah-inheriting-from-python">
+<h2>Cheetah inheriting from Python<a class="headerlink" href="#cheetah-inheriting-from-python" title="Permalink to this headline">¶</a></h2>
+<p>Whether or not you are aware of it, Cheetah templates are always inheriting from
+a Python class by default. Unless otherwise denoted, Cheetah templates are compiled
+to Python classes that subclass from the <cite>Cheetah.Template.Template</cite> class.</p>
+<p>What if you would like to introduce your own Template base class? Easily acheived by
+defining your own Template class in a Python module, for example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">Cheetah.Template</span>
+
+<span class="k">class</span> <span class="nc">CookbookTemplate</span><span class="p">(</span><span class="n">Cheetah</span><span class="o">.</span><span class="n">Template</span><span class="o">.</span><span class="n">Template</span><span class="p">):</span>
+    <span class="n">_page</span> <span class="o">=</span> <span class="s">&#39;Cookbook&#39;</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="s">&#39;R. Tyler Ballance&#39;</span>
+    <span class="k">def</span> <span class="nf">pageName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_page</span> <span class="ow">or</span> <span class="s">&#39;Unknown&#39;</span>
+</pre></div>
+</div>
+<p><strong>Figure 1. cookbook.py</strong></p>
+<p>For this example, I want all my subclasses of the <cite>CookbookTemplate</cite> to define a
+page author which will be used in some shared rendering code, to accomplish this
+my templates will need to subclass from <cite>CookbookTemplate</cite> explicitly instead of
+implicitly subclassing from <cite>Cheetah.Template.Template</cite>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#import cookbook</span>
+<span class="c">#extends cookbook.CookbookTemplate</span>
+<span class="c">#attr author = &#39;Tavis Rudd&#39;</span>
+
+<span class="c">## The rest of my recipe template would be below</span>
+</pre></div>
+</div>
+<p><strong>Figure 2. recipe1.tmpl</strong></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="precompiled.html" title="Precompiled Templates"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../documentation.html" title="User Documentation"
+             >previous</a> |</li>
+        <li><a href="../index.html">Cheetah - The Python-Powered Template Engine</a> &raquo;</li>
+          <li><a href="../documentation.html" >User Documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, R. Tyler Ballance.
+      Last updated on Jul 16, 2009.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+  </body>
+</html>

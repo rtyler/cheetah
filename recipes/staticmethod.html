@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>@staticmethod and @classmethod &mdash; Cheetah - The Python-Powered Template Engine</title>
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.2.1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Cheetah - The Python-Powered Template Engine" href="../index.html" />
+    <link rel="up" title="User Documentation" href="../documentation.html" />
+    <link rel="next" title="Writing a “Recipe”" href="writing_a_recipe.html" />
+    <link rel="prev" title="Precompiled Templates" href="precompiled.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="writing_a_recipe.html" title="Writing a “Recipe”"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="precompiled.html" title="Precompiled Templates"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Cheetah - The Python-Powered Template Engine</a> &raquo;</li>
+          <li><a href="../documentation.html" accesskey="U">User Documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="precompiled.html"
+                                  title="previous chapter">Precompiled Templates</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="writing_a_recipe.html"
+                                  title="next chapter">Writing a &#8220;Recipe&#8221;</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../sources/recipes/staticmethod.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="staticmethod-and-classmethod">
+<h1>&#64;staticmethod and &#64;classmethod<a class="headerlink" href="#staticmethod-and-classmethod" title="Permalink to this headline">¶</a></h1>
+<p>Refer the Python&#8217;s documentation if you&#8217;re unfamiliar with either
+<a class="reference external" href="http://docs.python.org/library/functions.html#staticmethod">&#64;staticmethod</a> or
+<a class="reference external" href="http://docs.python.org/library/functions.html#classmethod">&#64;classmethod</a> and their uses in Python, as they
+pertain to their uses in Cheetah as well. Using <a class="reference external" href="http://docs.python.org/library/functions.html#staticmethod">&#64;staticmethod</a> it&#8217;s
+trivial to create <em>utility templates</em> which are common when using
+Cheetah for web development. These <em>utility templates</em> might contain
+a number of small functions which generate useful snippets of markup.</p>
+<p>For example:</p>
+<div class="highlight-python"><pre>#def copyright()
+    #import time
+    &amp;copy; CheetahCorp, Inc. $time.strftime('%Y', time.gmtime())
+#end def</pre>
+</div>
+<p><strong>Figure 1, util.tmpl</strong></p>
+<p>Prior to version <strong>v2.2.0</strong> of Cheetah, there wasn&#8217;t really an easy means
+of filling templates with bunches of these small utility functions. In
+<strong>v2.2.0</strong> however, you can decorate these methods with <cite>#&#64;staticmethod</cite>
+and use &#8220;proper&#8221; Python syntax for calling them, <strong>fig 1</strong> revisited:</p>
+<div class="highlight-python"><pre>#@staticmethod
+#def copyright()
+    #import time
+    &amp;copy; CheetahCorp, Inc. $time.strftime('%Y', time.gmtime())
+#end def</pre>
+</div>
+<p><strong>Figure 1.1, util.tmpl</strong></p>
+<p>With the addition of the <a class="reference external" href="http://docs.python.org/library/functions.html#staticmethod">&#64;staticmethod</a> decorator, the <cite>copyright()</cite>
+function can now be used without instantiating an instance of the <cite>util</cite>
+template class. In effect:</p>
+<div class="highlight-python"><pre>#from util import util
+
+&lt;strong&gt;This is my page&lt;/strong&gt;
+&lt;br/&gt;
+&lt;hr noshade/&gt;
+$util.copyright()</pre>
+</div>
+<p><strong>Figure 2, index.tmpl</strong></p>
+<p>This approach is however no means to structure anything complex,
+<a class="reference external" href="http://docs.python.org/library/functions.html#staticmethod">&#64;staticmethod</a> and <a class="reference external" href="http://docs.python.org/library/functions.html#classmethod">&#64;classmethod</a> use in Cheetah is not meant as a
+replacement for properly structured class hierarchies (which
+Cheetah supports). That said if you are building a web application
+<a class="reference external" href="http://docs.python.org/library/functions.html#staticmethod">&#64;staticmethod</a>/<a class="reference external" href="http://docs.python.org/library/functions.html#classmethod">&#64;classmethod</a> are quite useful for the little snippets
+of markup, etc that are needed (Google AdSense blocks, footers,
+banners, etc).</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="writing_a_recipe.html" title="Writing a “Recipe”"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="precompiled.html" title="Precompiled Templates"
+             >previous</a> |</li>
+        <li><a href="../index.html">Cheetah - The Python-Powered Template Engine</a> &raquo;</li>
+          <li><a href="../documentation.html" >User Documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, R. Tyler Ballance.
+      Last updated on Jul 16, 2009.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+  </body>
+</html>

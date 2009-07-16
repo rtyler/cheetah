@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Contributing to Cheetah &mdash; Cheetah - The Python-Powered Template Engine</title>
+    <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.2.1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="Cheetah - The Python-Powered Template Engine" href="index.html" />
+    <link rel="next" title="Downloading Cheetah" href="download.html" />
+    <link rel="prev" title="Cheetah, the Python-Powered Template Engine" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="download.html" title="Downloading Cheetah"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Cheetah, the Python-Powered Template Engine"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Cheetah - The Python-Powered Template Engine</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">Contributing to Cheetah</a><ul>
+<li><a class="reference external" href="#getting-the-code">Getting the Code</a></li>
+<li><a class="reference external" href="#development-process">Development Process</a></li>
+<li><a class="reference external" href="#filing-bugs">Filing Bugs</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="index.html"
+                                  title="previous chapter">Cheetah, the Python-Powered Template Engine</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="download.html"
+                                  title="next chapter">Downloading Cheetah</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="sources/developers.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="contributing-to-cheetah">
+<h1>Contributing to Cheetah<a class="headerlink" href="#contributing-to-cheetah" title="Permalink to this headline">¶</a></h1>
+<p>Cheetah is the work of many volunteers. If you use Cheetah, share your experiences,
+tricks, customizations, and frustrations. Please join the <a class="reference external" href="http://lists.sourceforge.net/lists/listinfo/cheetahtemplate-discuss">mailing list</a></p>
+<div class="section" id="getting-the-code">
+<h2>Getting the Code<a class="headerlink" href="#getting-the-code" title="Permalink to this headline">¶</a></h2>
+<p>The Cheetah source code is stored in a central <strong>Git</strong> repository
+hosted primarily by <a class="reference external" href="http://github.com">GitHub</a>. The primary Git
+repository can be found <a class="reference external" href="http://github.com/cheetahtemplate/cheetah">here</a>.</p>
+</div>
+<div class="section" id="development-process">
+<h2>Development Process<a class="headerlink" href="#development-process" title="Permalink to this headline">¶</a></h2>
+<p>The typical development workflow for Cheetah revolves around
+two primary branches <strong>maint</strong> and <strong>next</strong>. The <strong>next</strong> branch is where development
+planned for the next release of Cheetah is. The <strong>maint</strong> branch
+on the otherhand is where backported fixes and patches will be applied for
+the current release of Cheetah will go, it&#8217;s common for a patch
+to be applied to maint and next at the same time.</p>
+<p>Anyone and everyone is encouraged to submit patches at any time, but as far
+as bugs or feature requests go, we try to file those <em>first</em> in the <a class="reference external" href="http://bugs.cheetahtemplate.org">Cheetah Bug Tracker</a>
+and then they can be organized into particular releases as is necessary.</p>
+<p>In addition to the bug tracker, Cheetah uses <a class="reference external" href="http://hudson-ci.org">Hudson</a> for
+automating builds and test runs on a number of platforms (see: <a class="reference external" href="http://hudson.cheetahtemplate.org">Cheetah&#8217;s Hudson</a>).
+Prior to the tarballing of
+a release, <strong>all</strong> tests must be passing before the <strong>next</strong> branch is merged down
+to the Git <strong>master</strong> branch where the release tarball will actually be created from.</p>
+</div>
+<div class="section" id="filing-bugs">
+<h2>Filing Bugs<a class="headerlink" href="#filing-bugs" title="Permalink to this headline">¶</a></h2>
+<p>No software is perfect, and unfortunately no bug report is either. If you&#8217;ve
+found yourself faced with a bug in Cheetah, or just have a good idea for a
+new feature, we kindly ask that you create an issue in the <a class="reference external" href="http://bugs.cheetahtemplate.org">Cheetah Bug Tracker</a>.</p>
+<p>Some tips for filing a <em>useful</em> bug report, try to include the following:</p>
+<ul class="simple">
+<li>A description of what you were trying to do, and what happened (i.e. reproduction steps), the more code you can include the better.</li>
+<li>Any and all tracebacks or compiler errors</li>
+<li>The version of Cheetah you&#8217;re using</li>
+<li>The version of Python you&#8217;re using</li>
+<li>The operating system you&#8217;re running Cheetah on</li>
+<li>Any other pieces of information you might think are relevant</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="download.html" title="Downloading Cheetah"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Cheetah, the Python-Powered Template Engine"
+             >previous</a> |</li>
+        <li><a href="index.html">Cheetah - The Python-Powered Template Engine</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, R. Tyler Ballance.
+      Last updated on Jul 16, 2009.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+  </body>
+</html>

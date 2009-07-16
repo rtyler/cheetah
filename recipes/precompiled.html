@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Precompiled Templates &mdash; Cheetah - The Python-Powered Template Engine</title>
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.2.1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Cheetah - The Python-Powered Template Engine" href="../index.html" />
+    <link rel="up" title="User Documentation" href="../documentation.html" />
+    <link rel="next" title="@staticmethod and @classmethod" href="staticmethod.html" />
+    <link rel="prev" title="Basic Inheritance" href="inheritance.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="staticmethod.html" title="@staticmethod and @classmethod"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="inheritance.html" title="Basic Inheritance"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Cheetah - The Python-Powered Template Engine</a> &raquo;</li>
+          <li><a href="../documentation.html" accesskey="U">User Documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">Precompiled Templates</a><ul>
+<li><a class="reference external" href="#why-bother">Why bother?</a></li>
+<li><a class="reference external" href="#basic-pre-compilation">Basic Pre-compilation</a></li>
+<li><a class="reference external" href="#importing-and-lookup">Importing and lookup</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="inheritance.html"
+                                  title="previous chapter">Basic Inheritance</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="staticmethod.html"
+                                  title="next chapter">&#64;staticmethod and &#64;classmethod</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../sources/recipes/precompiled.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="precompiled-templates">
+<h1>Precompiled Templates<a class="headerlink" href="#precompiled-templates" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="why-bother">
+<h2>Why bother?<a class="headerlink" href="#why-bother" title="Permalink to this headline">¶</a></h2>
+<p>Since Cheetah supports two basic modes: dynamic and precompiled templates, you have
+a lot of options when it comes to utilizing Cheetah, particularly in web environments.</p>
+<p>There is added speed to be gained by using pre-compiled templates, especially when
+using mod_python with Apache. Precompiling your templates means Apache/mod_python
+can load your template&#8217;s generated module into memory and then execution is only
+limited by the speed of the Python being executed, and not the Cheetah compiler.
+You can further optimize things by then pre-compiling the generated Python files
+(.py) down to Python byte-code (.pyc) so save cycles interpreting the Python.</p>
+</div>
+<div class="section" id="basic-pre-compilation">
+<h2>Basic Pre-compilation<a class="headerlink" href="#basic-pre-compilation" title="Permalink to this headline">¶</a></h2>
+<p>Suppose you have a template that looks something like this:</p>
+<div class="highlight-python"><pre>#attr title = "This is my Template"
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;\${title}&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        Hello \${who}!
+    &lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p><strong>Figure 1. hello.tmpl</strong></p>
+<p>In order to compile this down to a Python file, you need to only execute the
+<cite>cheetah compile hello.tmpl</cite> command. The results will be a Python file (.py)
+which you can then treat as any other Python module in your code base.</p>
+</div>
+<div class="section" id="importing-and-lookup">
+<h2>Importing and lookup<a class="headerlink" href="#importing-and-lookup" title="Permalink to this headline">¶</a></h2>
+<p>Typically for the template in <em>Figure 1</em>, I could easily import it post-compilation
+as any other Python module:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">templates</span> <span class="kn">import</span> <span class="n">hello</span>
+
+<span class="k">def</span> <span class="nf">myMethod</span><span class="p">():</span>
+    <span class="n">tmpl</span> <span class="o">=</span> <span class="n">hello</span><span class="o">.</span><span class="n">hello</span><span class="p">(</span><span class="n">searchList</span><span class="o">=</span><span class="p">[{</span><span class="s">&#39;who&#39;</span> <span class="p">:</span> <span class="s">&#39;world&#39;</span><span class="p">}])</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">tmpl</span><span class="o">.</span><span class="n">respond</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Figure 2. runner.py</strong></p>
+<p><em>Note:</em> If you use the <cite>#implements</cite> directive, <cite>respond</cite> may not be your &#8220;main
+method&#8221; for executing the Cheetah template. You can adjust the example above in
+<em>Figure 2</em> by using <cite>getattr()</cite> to make the lookup of the main method dynamic:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">myMethod</span><span class="p">():</span>
+    <span class="n">tmpl</span> <span class="o">=</span> <span class="n">hello</span><span class="o">.</span><span class="n">hello</span><span class="p">(</span><span class="n">searchList</span><span class="o">=</span><span class="p">[{</span><span class="s">&#39;who&#39;</span> <span class="p">:</span> <span class="s">&#39;world&#39;</span><span class="p">}])</span>
+    <span class="n">mainMethod</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">tmpl</span><span class="p">,</span> <span class="s">&#39;_mainCheetahMethod_for_</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">tmpl</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">tmpl</span><span class="p">,</span> <span class="n">mainMethod</span><span class="p">)()</span>
+</pre></div>
+</div>
+<p><strong>Figure 3. Dynamic runner.py</strong></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="staticmethod.html" title="@staticmethod and @classmethod"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="inheritance.html" title="Basic Inheritance"
+             >previous</a> |</li>
+        <li><a href="../index.html">Cheetah - The Python-Powered Template Engine</a> &raquo;</li>
+          <li><a href="../documentation.html" >User Documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, R. Tyler Ballance.
+      Last updated on Jul 16, 2009.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+  </body>
+</html>
