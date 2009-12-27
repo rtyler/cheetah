@@ -140,7 +140,7 @@ def run_setup(configurations):
     for name, value in kws.items():
         if name[:1] == '_':
             continue
-        if not isinstance(value, (basestring, list, tuple, dict, int)):
+        if not isinstance(value, (str, list, tuple, dict, int)):
             continue
         newkws[name] = value
     kws = newkws
