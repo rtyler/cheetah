@@ -155,7 +155,7 @@ def run_setup(configurations):
 
     # Invoke distutils setup
     try:
-        apply(setup, (), kws)
+        setup(**kws)
     except BuildFailed as x:
         print("One or more C extensions failed to build.")
         print("Details: %s" % x)
